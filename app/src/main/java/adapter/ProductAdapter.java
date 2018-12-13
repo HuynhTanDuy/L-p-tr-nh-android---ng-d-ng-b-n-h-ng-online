@@ -1,6 +1,7 @@
 package adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,8 +15,10 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import activity.ChiTietSanPham;
 import model.Product;
 import model.ProductType;
+import util.CheckInternetConnection;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHolder>{
     Context context;
@@ -58,6 +61,15 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
             ProductImage = (ImageView) itemView.findViewById(R.id.imageviewproduct);
             ProductName = (TextView) itemView.findViewById(R.id.textviewproductname);
             ProductPrice = (TextView) itemView.findViewById(R.id.textviewproductprice);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context,ChiTietSanPham.class);
+                    intent.putExtra("productData",arrProduct.get(getPosition()));
+                    CheckInternetConnection.ShowToast_Short(context,arrProduct.get(getPosition()).getProductName());
+                    context.startActivity(intent);
+                }
+            });
         }
     }
 }
