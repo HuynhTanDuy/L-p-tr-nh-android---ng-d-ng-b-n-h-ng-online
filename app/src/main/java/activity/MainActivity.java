@@ -34,6 +34,7 @@ import java.util.Objects;
 
 import adapter.ProductAdapter;
 import adapter.ProductTypeAdapter;
+import model.Cart;
 import model.Product;
 import model.ProductType;
 import util.CheckInternetConnection;
@@ -53,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
     int ID;
     String producttypename= "";
     String image = "";
+    public static ArrayList<Cart> arrCart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -275,5 +277,10 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewmanhinhchinh.setHasFixedSize(true);
         recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewmanhinhchinh.setAdapter(productAdapter);
+        if(arrCart != null){
+
+        }else{
+            arrCart=new ArrayList<>();
+        }
     }
 }

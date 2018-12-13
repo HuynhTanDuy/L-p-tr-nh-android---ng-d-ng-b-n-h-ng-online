@@ -69,7 +69,6 @@ public class DienThoaiAdapter extends BaseAdapter{
         viewHolder.txtmotadienthoai.setEllipsize(TextUtils.TruncateAt.END);
         viewHolder.txtmotadienthoai.setText(product.getProductDetail());
         Picasso.with(context).load(product.getImage())
-                .placeholder(R.drawable.error)
                 .error(R.drawable.error)
                 .into(viewHolder.imgdienthoai);
         return view;

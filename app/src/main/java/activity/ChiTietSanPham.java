@@ -1,5 +1,6 @@
 package activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +17,7 @@ import com.squareup.picasso.Picasso;
 
 import java.text.DecimalFormat;
 
+import model.Cart;
 import model.Product;
 
 public class ChiTietSanPham extends AppCompatActivity {
@@ -24,6 +26,14 @@ public class ChiTietSanPham extends AppCompatActivity {
     TextView txtten,txtgia,txtmota;
     Spinner spinner;
     Button btndatmua;
+
+    int id = 0;
+    String Tenchitiet = "";
+    int Giachitiet=0;
+    String Hinhanhchitiet = "";
+    String Motachitiet = "";
+    int Idsanpham = 0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +42,40 @@ public class ChiTietSanPham extends AppCompatActivity {
         ActionToolBar();
         GetInformation();
         CatchEventSpinner();
+        EventButton();
+    }
+
+    private void EventButton() {
+        btndatmua.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(MainActivity.arrCart.size()>0){
+                    int sl= Integer.parseInt(spinner.getSelectedItem().toString());
+                    boolean exits = false;
+                    for(int i = 0; i < MainActivity.arrCart.size(); i++){
+                        if(MainActivity.arrCart.get(i).getProductId() == id){
+                            MainActivity.arrCart.get(i).setProductNumber(MainActivity.arrCart.get(i).getProductNumber() + sl);
+                            if(MainActivity.arrCart.get(i).getProductNumber() >= 10){
+                                MainActivity.arrCart.get(i).setProductNumber(10);
+                            }
+                            MainActivity.arrCart.get(i).setPrice(Giachitiet * MainActivity.arrCart.get(i).getProductNumber());
+                            exits = true;
+                        }
+                    }
+                    if(exits == false){
+                        int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                        long Giamoi=soluong*Giachitiet;
+                        MainActivity.arrCart.add(new Cart(id,Tenchitiet,Giamoi,Hinhanhchitiet,soluong));
+                    }
+                }else{
+                    int soluong = Integer.parseInt(spinner.getSelectedItem().toString());
+                    long Giamoi=soluong*Giachitiet;
+                    MainActivity.arrCart.add(new Cart(id,Tenchitiet,Giamoi,Hinhanhchitiet,soluong));
+                }
+                Intent intent = new Intent(getApplicationContext(),CartActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void CatchEventSpinner() {
@@ -41,13 +85,6 @@ public class ChiTietSanPham extends AppCompatActivity {
     }
 
     private void GetInformation() {
-        int id = 0;
-        String Tenchitiet = "";
-        int Giachitiet=0;
-        String Hinhanhchitiet = "";
-        String Motachitiet = "";
-        int Idsanpham = 0;
-
         Product product = (Product) getIntent().getSerializableExtra("productData");
         id = product.getID();
         Tenchitiet = product.getProductName();
