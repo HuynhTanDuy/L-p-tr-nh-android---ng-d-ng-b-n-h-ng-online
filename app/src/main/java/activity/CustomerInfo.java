@@ -1,5 +1,6 @@
 package activity;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -15,6 +16,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ntd.shopping.R;
+
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,8 +60,54 @@ public class CustomerInfo extends AppCompatActivity {
                     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, Sever.billlink, new Response.Listener<String>() {
                         @Override
-                        public void onResponse(String response) {
-                            Log.d("Ma don hang",response);
+                        public void onResponse(final String madonhang) {
+                            Log.d("Ma don hang",madonhang);
+                            if(Integer.parseInt(madonhang)>0){
+                                RequestQueue queue = Volley.newRequestQueue(getApplicationContext());
+                                StringRequest request = new StringRequest(Request.Method.POST, Sever.orderdetaillink, new Response.Listener<String>() {
+                                    @Override
+                                    public void onResponse(String response) {
+                                        if(response.equals("1")) {
+                                            MainActivity.arrCart.clear();
+                                            CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Ban da them du lieu gio hang thanh cong");
+                                            Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+                                            startActivity(intent);
+                                            CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Moi ban tiep tuc mua sam");
+                                        }else{
+                                            CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Du lieu gio hang da bi loi");
+                                        }
+                                    }
+                                }, new Response.ErrorListener() {
+                                    @Override
+                                    public void onErrorResponse(VolleyError error) {
+
+                                    }
+                                }){
+                                    @Override
+                                    protected Map<String, String> getParams() throws AuthFailureError {
+                                        JSONArray jsonArray = new JSONArray();
+                                        for(int i=0;i<MainActivity.arrCart.size();i++)
+                                        {
+                                            JSONObject jsonObject = new JSONObject();
+                                            try {
+                                                jsonObject.put("madonhang",madonhang);
+                                                jsonObject.put("masanpham",MainActivity.arrCart.get(i).getProductId());
+                                                jsonObject.put("tensanpham",MainActivity.arrCart.get(i).getProductName());
+                                                jsonObject.put("giasanpham",MainActivity.arrCart.get(i).getPrice());
+                                                jsonObject.put("soluongsanpham",MainActivity.arrCart.get(i).getProductNumber());
+
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                            jsonArray.put(jsonObject);
+                                        }
+                                        HashMap<String,String> hashMap = new HashMap<String, String>();
+                                        hashMap.put("json",jsonArray.toString());
+                                        return hashMap;
+                                    }
+                                };
+                                queue.add(request);
+                            }
                         }
                     }, new Response.ErrorListener() {
                         @Override
