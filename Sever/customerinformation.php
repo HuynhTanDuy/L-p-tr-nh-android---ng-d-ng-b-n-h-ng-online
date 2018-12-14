@@ -1,8 +1,8 @@
 <?php
 	include "connect.php";
-	$customername="phat";
-	$phonenumber = "038242332423";
-	$email = "phat@gmail.com";
+	$customername=$_POST['customername'];
+	$phonenumber = $_POST['phonenumber'];
+	$email = $_POST['email'];
 	if(strlen($customername)>0&&strlen($email)>0&&strlen($phonenumber)>0)
 	{
 		$query = "INSERT INTO Bill(ID,CustomerName,PhoneNumber,Email) VALUES (NULL,'$customername','$phonenumber','$email')";
