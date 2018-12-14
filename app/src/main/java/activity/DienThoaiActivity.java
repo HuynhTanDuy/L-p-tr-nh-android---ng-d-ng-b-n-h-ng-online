@@ -110,7 +110,7 @@ public class DienThoaiActivity extends AppCompatActivity {
 
     private void GetData(int Page) {
         RequestQueue requestQueue=Volley.newRequestQueue(getApplicationContext());
-        String link= Sever.product;//+String.valueOf(Page);
+        String link= Sever.product+"?page="+String.valueOf(Page)+"&ProductID=1";
         StringRequest stringRequest=new StringRequest(Request.Method.POST, link, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -120,13 +120,13 @@ public class DienThoaiActivity extends AppCompatActivity {
                 String image="";
                 String detail="";
                 int productId=0;
-                if(response != null && response.length() > 0){
+                if(response != null && response.length() !=2 ){
                     lvdt.removeFooterView(footerview);
                     try {
                         JSONArray jsonArray = new JSONArray(response);
                         for (int i=0;i<jsonArray.length();i++){
                             JSONObject jsonObject=jsonArray.getJSONObject(i);
-                            id = jsonObject.getInt("productid");
+                            id = jsonObject.getInt("id");
                             phoneName = jsonObject.getString("productname");
                             price = jsonObject.getInt("price");
                             image = jsonObject.getString("image");

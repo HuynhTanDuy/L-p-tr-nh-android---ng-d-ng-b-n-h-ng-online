@@ -67,6 +67,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ItemHold
                     Intent intent = new Intent(context,ChiTietSanPham.class);
                     intent.putExtra("productData",arrProduct.get(getPosition()));
                     CheckInternetConnection.ShowToast_Short(context,arrProduct.get(getPosition()).getProductName());
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
                 }
             });

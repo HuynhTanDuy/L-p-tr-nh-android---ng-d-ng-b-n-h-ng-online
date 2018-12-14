@@ -71,7 +71,7 @@ public class CartAdapter extends BaseAdapter {
         Picasso.with(context).load(cart.getProductImage())
                 .error(R.drawable.error)
                 .into(viewHolder.imgcart);
-        viewHolder.btnvalues.setText(cart.getProductNumber());
+        viewHolder.btnvalues.setText(cart.getProductNumber()+"");
         int sl = Integer.parseInt(viewHolder.btnvalues.getText().toString());
         if(sl>=10) {
             viewHolder.btnplus.setVisibility(View.INVISIBLE);
