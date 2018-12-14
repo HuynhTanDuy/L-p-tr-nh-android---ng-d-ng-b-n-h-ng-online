@@ -1,8 +1,11 @@
 package activity;
 
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,7 +22,7 @@ import model.Cart;
 public class CartActivity extends AppCompatActivity {
     ListView lvcart;
     TextView txtNotify;
-    TextView txtTotalCash;
+    static TextView txtTotalCash;
     Button btnPay,btnContinueBuy;
     android.support.v7.widget.Toolbar toolbarcart;
     CartAdapter cartAdapter;
@@ -31,8 +34,52 @@ public class CartActivity extends AppCompatActivity {
         ActionToolbar();
         CheckData();
         EvenUtils();
+        CatchOnItemListView();
     }
-    private void EvenUtils(){
+
+    private void CatchOnItemListView() {
+        lvcart.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                AlertDialog.Builder builder= new AlertDialog.Builder(CartActivity.this);
+                builder.setTitle("Ban co muon xoa san pham nay");
+                builder.setMessage("Ban co chac muon xoa san pham nay");
+                builder.setPositiveButton("Co", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        if(MainActivity.arrCart.size()<=0)
+                        {
+                            txtNotify.setVisibility(View.VISIBLE);
+                        }
+                        else {
+                            MainActivity.arrCart.remove(position);
+                            cartAdapter.notifyDataSetChanged();
+                            EvenUtils();
+                            if(MainActivity.arrCart.size()<=0){
+                                txtNotify.setVisibility(View.VISIBLE);
+                            }
+                            else{
+                                txtNotify.setVisibility(View.INVISIBLE);
+                                cartAdapter.notifyDataSetChanged();
+                                EvenUtils();
+                            }
+                        }
+                    }
+                });
+                builder.setNegativeButton("Khong", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        cartAdapter.notifyDataSetChanged();
+                        EvenUtils();
+                    }
+                });
+                builder.show();
+                return true;
+            }
+        });
+    }
+
+    public static void EvenUtils(){
         long totalcash = 0;
         for(int i=0;i<MainActivity.arrCart.size();i++)
         {

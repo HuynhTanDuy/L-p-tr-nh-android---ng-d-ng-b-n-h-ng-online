@@ -15,6 +15,8 @@ import com.squareup.picasso.Picasso;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 
+import activity.CartActivity;
+import activity.MainActivity;
 import model.Cart;
 
 public class CartAdapter extends BaseAdapter {
@@ -46,7 +48,7 @@ public class CartAdapter extends BaseAdapter {
         public Button btnminus,btnvalues,btnplus;
     }
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         ViewHolder viewHolder=null;
         if (convertView==null){
             viewHolder=new ViewHolder();
@@ -70,6 +72,67 @@ public class CartAdapter extends BaseAdapter {
                 .error(R.drawable.error)
                 .into(viewHolder.imgcart);
         viewHolder.btnvalues.setText(cart.getProductNumber());
+        int sl = Integer.parseInt(viewHolder.btnvalues.getText().toString());
+        if(sl>=10) {
+            viewHolder.btnplus.setVisibility(View.INVISIBLE);
+            viewHolder.btnplus.setVisibility(View.VISIBLE);
+        }else if(sl<=1) {
+            viewHolder.btnminus.setVisibility(View.INVISIBLE);
+            viewHolder.btnplus.setVisibility(View.VISIBLE);
+        }
+        else if(sl>1) {
+            viewHolder.btnminus.setVisibility(View.VISIBLE);
+            viewHolder.btnplus.setVisibility(View.VISIBLE);
+        }
+        final ViewHolder finalViewHolder = viewHolder;
+        viewHolder.btnplus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int newsl = Integer.parseInt(finalViewHolder.btnvalues.getText().toString()) +1;
+                int cursl = (int) MainActivity.arrCart.get(position).getPrice();
+                long giaht = MainActivity.arrCart.get(position).getPrice();
+                MainActivity.arrCart.get(position).setProductNumber(newsl);
+                long newcash = (giaht*newsl)/cursl;
+                MainActivity.arrCart.get(position).setPrice(newcash);
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                finalViewHolder.txtcartcost.setText(decimalFormat.format(newcash + " Đ"));
+                CartActivity.EvenUtils();
+                if(newsl>9){
+                    finalViewHolder.btnplus.setVisibility(View.INVISIBLE);
+                    finalViewHolder.btnminus.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnvalues.setText(String.valueOf(newsl));
+                }
+                else
+                {
+                    finalViewHolder.btnplus.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnminus.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+        viewHolder.btnminus.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int newsl = Integer.parseInt(finalViewHolder.btnvalues.getText().toString()) -1;
+                int cursl = (int) MainActivity.arrCart.get(position).getPrice();
+                long giaht = MainActivity.arrCart.get(position).getPrice();
+                MainActivity.arrCart.get(position).setProductNumber(newsl);
+                long newcash = (giaht*newsl)/cursl;
+                MainActivity.arrCart.get(position).setPrice(newcash);
+                DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
+                finalViewHolder.txtcartcost.setText(decimalFormat.format(newcash + " Đ"));
+                CartActivity.EvenUtils();
+                if(newsl<2){
+                    finalViewHolder.btnminus.setVisibility(View.INVISIBLE);
+                    finalViewHolder.btnplus.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnvalues.setText(String.valueOf(newsl));
+                }
+                else
+                {
+                    finalViewHolder.btnplus.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnminus.setVisibility(View.VISIBLE);
+                }
+            }
+        });
         return convertView;
     }
 }
