@@ -1,6 +1,6 @@
 <?php
 	include "connect.php";
-	$json = $_POST['json']
+	$json = $_POST['json'];
 	$data = json_decode($json,true);
 	foreach ($data as $value) {
 		$OrderCode = $value['OrderCode'];
