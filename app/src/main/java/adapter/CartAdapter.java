@@ -67,7 +67,7 @@ public class CartAdapter extends BaseAdapter {
         Cart cart= (Cart) getItem(position);
         viewHolder.txtcartname.setText(cart.getProductName());
         DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-        viewHolder.txtcartcost.setText(decimalFormat.format(cart.getPrice() + " Đ"));
+        viewHolder.txtcartcost.setText(decimalFormat.format(cart.getPrice()) + " Đ");
         Picasso.with(context).load(cart.getProductImage())
                 .error(R.drawable.error)
                 .into(viewHolder.imgcart);
@@ -95,7 +95,7 @@ public class CartAdapter extends BaseAdapter {
                 long newcash = (giaht*newsl)/cursl;
                 MainActivity.arrCart.get(position).setPrice(newcash);
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                finalViewHolder.txtcartcost.setText(decimalFormat.format(newcash + " Đ"));
+                finalViewHolder.txtcartcost.setText(decimalFormat.format(newcash) + " Đ");
                 CartActivity.EvenUtils();
                 if(newsl>9){
                     finalViewHolder.btnplus.setVisibility(View.INVISIBLE);
@@ -119,7 +119,7 @@ public class CartAdapter extends BaseAdapter {
                 long newcash = (giaht*newsl)/cursl;
                 MainActivity.arrCart.get(position).setPrice(newcash);
                 DecimalFormat decimalFormat = new DecimalFormat("###,###,###");
-                finalViewHolder.txtcartcost.setText(decimalFormat.format(newcash + " Đ"));
+                finalViewHolder.txtcartcost.setText(decimalFormat.format(newcash) + " Đ");
                 CartActivity.EvenUtils();
                 if(newsl<2){
                     finalViewHolder.btnminus.setVisibility(View.INVISIBLE);
