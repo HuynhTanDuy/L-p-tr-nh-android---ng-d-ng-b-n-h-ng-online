@@ -90,11 +90,11 @@ public class CustomerInfo extends AppCompatActivity {
                                         {
                                             JSONObject jsonObject = new JSONObject();
                                             try {
-                                                jsonObject.put("madonhang",madonhang);
-                                                jsonObject.put("masanpham",MainActivity.arrCart.get(i).getProductId());
-                                                jsonObject.put("tensanpham",MainActivity.arrCart.get(i).getProductName());
-                                                jsonObject.put("giasanpham",MainActivity.arrCart.get(i).getPrice());
-                                                jsonObject.put("soluongsanpham",MainActivity.arrCart.get(i).getProductNumber());
+                                                jsonObject.put("OrderCode",madonhang);
+                                                jsonObject.put("ProductID",MainActivity.arrCart.get(i).getProductId());
+                                                jsonObject.put("ProductName",MainActivity.arrCart.get(i).getProductName());
+                                                jsonObject.put("Price",MainActivity.arrCart.get(i).getPrice());
+                                                jsonObject.put("Number",MainActivity.arrCart.get(i).getProductNumber());
 
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
