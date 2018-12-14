@@ -89,7 +89,7 @@ public class CartAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 int newsl = Integer.parseInt(finalViewHolder.btnvalues.getText().toString()) +1;
-                int cursl = (int) MainActivity.arrCart.get(position).getPrice();
+                int cursl = (int) MainActivity.arrCart.get(position).getProductNumber();
                 long giaht = MainActivity.arrCart.get(position).getPrice();
                 MainActivity.arrCart.get(position).setProductNumber(newsl);
                 long newcash = (giaht*newsl)/cursl;
@@ -106,6 +106,7 @@ public class CartAdapter extends BaseAdapter {
                 {
                     finalViewHolder.btnplus.setVisibility(View.VISIBLE);
                     finalViewHolder.btnminus.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnvalues.setText(String.valueOf(newsl));
                 }
             }
         });
@@ -113,7 +114,7 @@ public class CartAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 int newsl = Integer.parseInt(finalViewHolder.btnvalues.getText().toString()) -1;
-                int cursl = (int) MainActivity.arrCart.get(position).getPrice();
+                int cursl = (int) MainActivity.arrCart.get(position).getProductNumber();
                 long giaht = MainActivity.arrCart.get(position).getPrice();
                 MainActivity.arrCart.get(position).setProductNumber(newsl);
                 long newcash = (giaht*newsl)/cursl;
@@ -130,6 +131,7 @@ public class CartAdapter extends BaseAdapter {
                 {
                     finalViewHolder.btnplus.setVisibility(View.VISIBLE);
                     finalViewHolder.btnminus.setVisibility(View.VISIBLE);
+                    finalViewHolder.btnvalues.setText(String.valueOf(newsl));
                 }
             }
         });
