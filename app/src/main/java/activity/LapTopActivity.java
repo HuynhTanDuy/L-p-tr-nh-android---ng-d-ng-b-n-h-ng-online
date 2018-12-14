@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -116,6 +117,7 @@ public class LapTopActivity extends AppCompatActivity {
     }
     private void GetIdloaisp() {
         idlaptop=getIntent().getIntExtra("producttypeid",-1);
+        Log.d("giatriloaisanpham",idlaptop+"");
     }
 
     private void ActionToolbar() {
