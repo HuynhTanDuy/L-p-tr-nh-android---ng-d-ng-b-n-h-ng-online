@@ -52,12 +52,12 @@ public class CartAdapter extends BaseAdapter {
             viewHolder=new ViewHolder();
             LayoutInflater inflater= (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView=inflater.inflate(R.layout.dong_cart,null);
-            viewHolder.txtcartname = convertView.findViewById(R.id.textviewcartname);
-            viewHolder.txtcartcost = convertView.findViewById(R.id.textviewcartcost);
-            viewHolder.imgcart = convertView.findViewById(R.id.imageviewcart);
-            viewHolder.btnminus = convertView.findViewById(R.id.buttonminus);
-            viewHolder.btnvalues = convertView.findViewById(R.id.buttonvalue);
-            viewHolder.btnplus = convertView.findViewById(R.id.buttonplus);
+            viewHolder.txtcartname = (TextView) convertView.findViewById(R.id.textviewcartname);
+            viewHolder.txtcartcost = (TextView) convertView.findViewById(R.id.textviewcartcost);
+            viewHolder.imgcart = (ImageView) convertView.findViewById(R.id.imageviewcart);
+            viewHolder.btnminus = (Button) convertView.findViewById(R.id.buttonminus);
+            viewHolder.btnvalues = (Button) convertView.findViewById(R.id.buttonvalue);
+            viewHolder.btnplus = (Button) convertView.findViewById(R.id.buttonplus);
             convertView.setTag(viewHolder);
         }else {
             viewHolder= (ViewHolder) convertView.getTag();

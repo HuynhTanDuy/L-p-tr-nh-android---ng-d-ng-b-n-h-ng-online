@@ -64,6 +64,8 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent">
                 <TextView
+                    android:id="@+id/textviewtotalcash"
+                    android:singleLine="true"
                     android:textColor="#f20"
                     android:text="Giá Trị"
                     android:textSize="30sp"
