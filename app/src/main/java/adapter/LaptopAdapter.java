@@ -38,7 +38,7 @@ public class LaptopAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return i;
     }
     public class ViewHolder{
         public TextView txttenlaptop,txtgialaptop,txtmotalaptop;

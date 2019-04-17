@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toolbar;
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
     ProductTypeAdapter productTypeAdapter;
     ArrayList<Product> arrProduct;
     ProductAdapter productAdapter;
+    Button btnuser;
+    static boolean islogin=false;
     int ID;
     String producttypename= "";
     String image = "";
@@ -296,10 +300,29 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewmanhinhchinh.setHasFixedSize(true);
         recyclerViewmanhinhchinh.setLayoutManager(new GridLayoutManager(getApplicationContext(),2));
         recyclerViewmanhinhchinh.setAdapter(productAdapter);
+        btnuser =(Button)findViewById(R.id.user);
+        btnuser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                validate();
+            }
+        });
         if(arrCart != null){
 
         }else{
             arrCart=new ArrayList<>();
         }
+    }
+    private void validate()
+    {
+        Intent intent;
+        if(islogin==false) {
+            intent = new Intent(MainActivity.this, LogIn.class);
+        }
+        else
+        {
+            intent = new Intent(MainActivity.this, UserInformation.class);
+        }
+            startActivity(intent);
     }
 }
