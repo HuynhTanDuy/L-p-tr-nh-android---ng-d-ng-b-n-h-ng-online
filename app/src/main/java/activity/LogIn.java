@@ -36,9 +36,9 @@ public class LogIn extends AppCompatActivity {
         {
             if(username.equals("Admin")) {
                 MainActivity.islogin = true;
-                Intent intent = new Intent(this.getApplicationContext(), MainActivity.class);
+                Intent intent = new Intent(getApplicationContext(), loading.class);
                 startActivity(intent);
-                CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Login Success");
+
             }
         }
         else
