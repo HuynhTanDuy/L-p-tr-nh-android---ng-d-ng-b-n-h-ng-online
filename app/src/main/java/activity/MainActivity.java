@@ -57,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
     ProductAdapter productAdapter;
     Button btnuser;
     static boolean islogin=false;
+    static String username;
     int ID;
     String producttypename= "";
     String image = "";
@@ -73,6 +74,7 @@ public class MainActivity extends AppCompatActivity {
             GetProductTypeData();
             GetNewProductData();
             CatchOnItemListView();
+            //CheckLogin();
         }
         else
         {
@@ -283,7 +285,11 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-
+    private void CheckLogin()
+    {
+        if(islogin)
+            CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Log In Successfully");
+    }
     private void Anhxa() {
         toolbar = (android.support.v7.widget.Toolbar) findViewById(R.id.toolbarmanhinhchinh);
         viewFlipper = (ViewFlipper) findViewById(R.id.viewfliper);

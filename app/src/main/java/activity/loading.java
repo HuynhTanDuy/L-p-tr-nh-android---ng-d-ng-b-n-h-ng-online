@@ -18,10 +18,11 @@ public class loading extends AppCompatActivity {
             @Override
             public void run(){
                 try {
-                    sleep(3000);
+                    //CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Login Success");
+                    sleep(1000);
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                     startActivity(intent);
-                    CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Login Success");
+
                     finish ();
                 } catch (InterruptedException e)
                 { e.printStackTrace();}

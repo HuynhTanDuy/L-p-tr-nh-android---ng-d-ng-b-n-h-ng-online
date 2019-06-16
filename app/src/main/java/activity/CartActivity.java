@@ -52,8 +52,13 @@ public class CartActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (MainActivity.arrCart.size() > 0 ){
-                    Intent intent=new Intent(getApplicationContext(),CustomerInfo.class);
-                    startActivity(intent);
+                    if(MainActivity.islogin) {
+                        Intent intent = new Intent(getApplicationContext(), CustomerInfo.class);
+                        startActivity(intent);
+                    }
+                    else{
+                        CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Please log in to countinue shopping");
+                    }
                 }else{
                     CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Empty cart!");
                 }

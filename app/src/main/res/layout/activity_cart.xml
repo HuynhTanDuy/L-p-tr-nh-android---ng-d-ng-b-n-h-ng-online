@@ -10,6 +10,7 @@
     android:weightSum="10">
     <android.support.v7.widget.Toolbar
         android:background="#0090ff"
+        app:titleTextColor="#ffffff"
         app:title="Giỏ hàng"
         android:id="@+id/toolbarcart"
         android:layout_width="match_parent"

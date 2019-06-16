@@ -1,7 +1,7 @@
 <?php
 	include "connect.php";
-	$customername=$_POST['customername'];
-	$phonenumber = $_POST['phonenumber'];
+	$customername="a";
+	$phonenumber = "b";
 	$email = $_POST['email'];
 	if(strlen($customername)>0&&strlen($email)>0&&strlen($phonenumber)>0)
 	{

@@ -54,7 +54,8 @@
             android:label="@string/title_activity_thong_tin" />
         <activity android:name="activity.UserInformation" />
         <activity android:name="activity.LogIn" />
-        <activity android:name="activity.loading"></activity>
+        <activity android:name="activity.loading" />
+        <activity android:name="activity.SignUp"></activity>
     </application>
 
 </manifest>

@@ -56,6 +56,7 @@ public class CustomerInfo extends AppCompatActivity {
                 final String Name = edtCustomerName.getText().toString().trim();
                 final String Phone = edtPhoneNumber.getText().toString().trim();
                 final String email = edtEmail.getText().toString().trim();
+                String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
                 if(Name.length()>0&& Phone.length()>0&&email.length()>0){
                     RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
                     StringRequest stringRequest = new StringRequest(Request.Method.POST, Sever.billlink, new Response.Listener<String>() {
@@ -69,7 +70,7 @@ public class CustomerInfo extends AppCompatActivity {
                                     public void onResponse(String response) {
                                         if(response.equals("1")) {
                                             MainActivity.arrCart.clear();
-                                            CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Ban da them du lieu gio hang thanh cong");
+                                            CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Ban da dat hang thanh cong");
                                             Intent intent = new Intent(getApplicationContext(),MainActivity.class);
                                             startActivity(intent);
                                             CheckInternetConnection.ShowToast_Short(getApplicationContext(),"Moi ban tiep tuc mua sam");
