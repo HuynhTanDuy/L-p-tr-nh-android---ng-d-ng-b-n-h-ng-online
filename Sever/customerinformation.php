@@ -1,11 +1,11 @@
 <?php
 	include "connect.php";
-	$customername="a";
-	$phonenumber = "b";
+	$customername=$_POST['customername'];
+	$phonenumber = $_POST['phonenumber'];
 	$email = $_POST['email'];
 	if(strlen($customername)>0&&strlen($email)>0&&strlen($phonenumber)>0)
 	{
-		$query = "INSERT INTO Bill(ID,CustomerName,PhoneNumber,Email) VALUES (NULL,'$customername','$phonenumber','$email')";
+		$query = "INSERT INTO Bill(ID,CustomerName,PhoneNumber,Address) VALUES (NULL,'$customername','$phonenumber','$email')";
 		if(mysqli_query($conn,$query)){
 			$billid  = $conn->insert_id;
 			echo $billid;
